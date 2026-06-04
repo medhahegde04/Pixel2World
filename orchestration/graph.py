@@ -1,25 +1,9 @@
 from langgraph.graph import StateGraph, START, END
 from state import Pixel2WorldState
+from nodes.perception import perception_node 
 
 # --- Stub Nodes ---
 # placeholders to test logic
-
-def perception_node(state: Pixel2WorldState) -> dict:
-    print(f"[PERCEPTION] Analysing image: {state['image_path']}")
-
-    # future update: call Llama 3.2-Vision
-    # currently testing with fake scene description
-
-    return {
-        "scene_description": {
-            "regions": [
-                {"label": "mountain", "elevation": "high", "position": "center", "dominant_color": "#452020"},
-                {"label": "forest", "elevation": "medium", "position": "north", "dominant_color": "#228B22"},
-                {"label": "water", "elevation": "low", "position": "south-east", "dominant_color": "#1E90FF"}    
-            ]
-        }
-    }
-
 
 def inference_node(state: Pixel2WorldState) -> dict:
     current_iteration = state["iteration"] + 1

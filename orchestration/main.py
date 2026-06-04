@@ -1,7 +1,7 @@
 from graph import graph
 
 initial_state = {
-    "image_path": "test.png",
+    "image_path": "nodes/test_image.png",
     "scene_description": None,
     "depth_map": None,
     "review_pass": False,
