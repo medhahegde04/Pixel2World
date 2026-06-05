@@ -1,6 +1,7 @@
 from langgraph.graph import StateGraph, START, END
 from state import Pixel2WorldState
-from nodes.perception import perception_node 
+from nodes.perception import perception_node
+from nodes.review import review_node 
 
 # --- Stub Nodes ---
 # placeholders to test logic
@@ -35,26 +36,6 @@ def inference_node(state: Pixel2WorldState) -> dict:
 
     return updates
 
-
-def review_node(state: Pixel2WorldState) -> dict:
-    print(f"[REVIEW] Checking depth map quality - iteration {state['iteration']}")
-    
-    # future update: call Llama 3.2-Vision as a quality critic
-    # currently testing with fake review logic (fail first 2 iterations, pass on 3rd)
-
-    if state["iteration"] < 3:
-        print("[REVIEW] FAILED - fake artifact detected")
-        return {
-            "review_pass": False,
-            "artifacts": ["inverted elevation in center region"]
-        }
-    else:
-        print("[REVIEW] PASSED")
-        return {
-            "review_pass": True,
-            "artifacts": []
-        }
-    
 
 def execution_node(state: Pixel2WorldState) -> dict:
     print(f"[EXECUTION] Sending terrain data to Unity via FastAPI")
