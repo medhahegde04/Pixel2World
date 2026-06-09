@@ -2,6 +2,7 @@ from langgraph.graph import StateGraph, START, END
 from state import Pixel2WorldState
 from nodes.perception import perception_node
 from nodes.review import review_node 
+from nodes.execution import execution_node
 
 # --- Stub Nodes ---
 # placeholders to test logic
@@ -35,21 +36,6 @@ def inference_node(state: Pixel2WorldState) -> dict:
         updates["best_score"] = fake_score
 
     return updates
-
-
-def execution_node(state: Pixel2WorldState) -> dict:
-    print(f"[EXECUTION] Sending terrain data to Unity via FastAPI")
-    depth_to_send = state["best_depth_map"] or state["depth_map"]
-    print(f"[EXECUTION] Using best_depth_map: {depth_to_send is state['best_depth_map']} with score {state['best_score']}")
-    print(f"[EXECUTION] Biomes to apply: {[r['label'] for r in state['scene_description']['regions']]}")
-    
-    # future update: send data to FastAPI endpoint
-    # currently testing with fake execution logic
-
-    return {
-        "terrain_sent": True
-    }
-
 
 
 # --- Routing Function ---
